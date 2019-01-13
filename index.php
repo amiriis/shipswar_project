@@ -1,16 +1,14 @@
 <?php
 
-function __autoload($class){
-
- require "system/$class.php";
-
+function __autoload($classname){
+  if(file_exists("system/$classname.php")){
+    require "system/$classname.php";
+  }
+  else if(file_exists("$classname.php")){
+    require "$classname.php";
+  }
 }
 
 require 'config.php';
 
-
-/**
- * Optional name folders
- */
-$app = new Bootstrap();
-$app->init();
+$Route = new routes();
