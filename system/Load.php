@@ -38,6 +38,9 @@ class Load{
 
       return call_user_func(array($_controller,$method));
     }
+    else {
+      echo "this controller not found!";
+    }
   }
 
   function view($name, $data = array()) {
