@@ -3,8 +3,9 @@
  * Address App Config
  */
 define("URL", "http://localhost/shipswar_project");
-define("SITE_URL", "/shipswar_project/");
 define("SITE_NAME","جنگ کشتی ها");
+define("SITE_URL", "/shipswar_project/");
+define("SITE_DIR", $_SERVER['DOCUMENT_ROOT'] . SITE_URL);
 define("URL_CSS", "public/css/");
 define("URL_JS", "public/js/");
 define("URL_IMAGE", "public/images/");

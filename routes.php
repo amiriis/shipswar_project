@@ -1,9 +1,13 @@
 <?php
 
-class routes {
+class routes extends Router{
   function __construct(){
-    Router::get('1/2/3','amir@index');
-    Router::get('test','mir/test@index');
-    Router::get('/','index@index');
+    Router::get("/","index@index");
+    Router::get("game/{id}","games@index");
+    Router::get("test","mir/test@index");
+    Router::post("test","mir/test@host");
+    Router::post("amir","mir/test@index");
+
+    $this->routing();
   }
 }

@@ -5,7 +5,17 @@ class ControllerMirTest extends Controller {
 
     $this->load->model('full/amir');
 
-    $this->model_full_amir->get();
+    $data['amir'] = $this->model_full_amir->get();
+
+    $data['test'] = 'ya asfsaf';
+
+    $this->load->view('test.twig',$data);
+
+  }
+
+  function host(){
+    echo "string";
+
 
   }
 }

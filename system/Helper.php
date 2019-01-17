@@ -1,8 +1,8 @@
 <?php
 
-class Bootstrap {
+class Helper {
 
-  function url($__url){
+  function _url($__url){
     $url = isset($__url) ? $__url : NULL;
     $url = rtrim($url, '/');
     $url = filter_var($url, FILTER_SANITIZE_URL);
@@ -13,5 +13,11 @@ class Bootstrap {
     $url = isset($__string) ? $__string : NULL;
     $url = rtrim($__string, '@');
     return explode('@', $url);
+  }
+
+  function _pr($array = array()){
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
   }
 }
