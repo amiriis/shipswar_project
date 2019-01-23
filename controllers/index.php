@@ -2,6 +2,6 @@
 
 class ControllerIndex extends Controller {
   function index(){
-    echo "this page index";
+    $this->output($this->load->view('index.twig', $this->data));
   }
 }

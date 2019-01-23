@@ -1,0 +1,93 @@
+{% extends "layouts/warMaster.twig" %}
+
+{% block title %}wars{% endblock %}
+
+{% block content %}
+  {% for alert in success %}
+    <div class="alert alert-success" role="alert">
+      {{ alert }}
+    </div>
+  {% endfor %}
+  {% for alert in error %}
+    <div class="alert alert-danger" role="alert">
+      {{ alert }}
+    </div>
+  {% endfor %}
+
+  <div class="row">
+    <div class="col col-12">
+      <h3>Start a war</h3>
+      <table class="table">
+        <tr>
+          <th>No.</th>
+          <th>Nickname</th>
+          <th></th>
+        </tr>
+        {% for user in users %}
+          <tr>
+            <td> {{loop.index}} </td>
+            <td> {{user.name}} </td>
+            <td>
+              <a class="btn btn-dark" href="./wars/requestfight/{{user.id}}" role="button">Request war</a>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td class="text-center" colspan="3">Not Found!</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="col">
+      <h3>War requests For You</h3>
+      <table class="table">
+        <tr>
+          <th>No.</th>
+          <th>Nickname</th>
+          <th>status</th>
+          <th></th>
+        </tr>
+        {% for user in requestFor %}
+          <tr>
+            <td> {{loop.index}} </td>
+            <td> {{user.name}} </td>
+            <td> {{user.status}} </td>
+            <td>
+              <a class="btn btn-dark" href="./wars/requestfight/{{user.id}}" role="button">I fight</a>
+            </td>
+          </tr>
+        {% else %}
+        <tr>
+          <td class="text-center" colspan="3">Not Found!</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="col">
+      <h3>War requests from you</h3>
+      <table class="table">
+        <tr>
+          <th>No.</th>
+          <th>Nickname</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        {% for user in requestFrom %}
+          <tr>
+            <td> {{loop.index}} </td>
+            <td> {{user.name}} </td>
+            <td> {{user.status}} </td>
+            <td>
+              <a class="btn btn-dark" href="./wars/cancelrequestfight/{{user.id}}" role="button">cancel request</a>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td class="text-center" colspan="3">Not Found!</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

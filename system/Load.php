@@ -2,6 +2,7 @@
 
 class Load{
   private $this_controller = null;
+  private $_output = null;
 
   function __construct($controller){
     $this->this_controller = $controller;
@@ -37,7 +38,7 @@ class Load{
       $_controller = new $_controllerClass;
 
       if(!method_exists($_controller,$method)){
-        Errors::Not_Exist_Function();
+        Errors::Not_Exist_Function($method);
         return FALSE;
       }
 
@@ -52,7 +53,7 @@ class Load{
         $_controller->post()->$key = $value;
       }
 
-      
+      $_controller->post = $args_post;
 
       return call_user_func(array($_controller,$method));
 
@@ -64,6 +65,36 @@ class Load{
   }
 
   function view($name, $data = array()) {
-    $this->this_controller->view = new View($name, $data);
+
+    $data['URL_JS'] = URL_JS;
+    $data['URL_CSS'] = URL_CSS;
+    $data['URL_IMAGE'] = URL_IMAGE;
+    $data['SITE_NAME'] = SITE_NAME;
+
+    require_once SITE_DIR . 'vendor/autoload.php';
+
+    $loader = new Twig_Loader_Filesystem(SITE_DIR . 'views');
+    $twig = new Twig_Environment($loader, [
+      'debug' => true,
+      'cache' => SITE_DIR . 'cache/dev/twig',
+    ]);
+
+    $twig->addExtension(new Twig_Extension_Debug());
+
+    ob_start();
+
+    echo $twig->render($name,$data);
+
+    $this->_output = ob_get_contents();
+
+    ob_end_clean();
+
+    return $this->_output;
+  }
+
+  function output(){
+    if($this->_output != null){
+      echo $this->_output;
+    }
   }
 }

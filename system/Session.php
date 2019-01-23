@@ -1,15 +1,15 @@
 <?php
 
 class Session {
-  function static init(){
+  function init(){
     @session_start();
   }
 
-  function static set($key, $value){
+  function set($key, $value){
     $_SESSION[$key] = $value;
   }
 
-  function static get($key){
+  function get($key){
     if(isset($_SESSION[$key])){
       return $_SESSION[$key];
     }
@@ -18,7 +18,7 @@ class Session {
     }
   }
 
-  function static unset($key){
+  function unset($key){
     if(isset($_SESSION[$key])){
       unset($_SESSION[$key]);
       return TRUE;

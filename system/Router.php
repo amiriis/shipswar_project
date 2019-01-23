@@ -95,6 +95,22 @@ class Router {
     }
   }
 
+  public function redirect($route){
+    $url_route = '';
+    if($route != '/') {
+      $url_route = '/' . $route;
+    }
+    header('Location: '. URL . $url_route);
+    exit();
+  }
+
+  public function url($route){
+    Session::init();
+    Session::unset('_ref');
+    header('Location: ' . $route);
+    exit();
+  }
+
   public function routing(){
     if(!$this->_isRoute){
       Errors::Not_Exist_Route();
